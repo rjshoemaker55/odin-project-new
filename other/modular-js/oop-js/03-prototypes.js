@@ -7,12 +7,31 @@ function Book(title, author, year) {
 }
 
 // getSummary prototype method
+
+// placing it in the prototype ensures that only ONE getSummary
+// function is created, instead of one for every book.
 Book.prototype.getSummary = function () {
   return `${this.title} was written by ${this.author} in ${this.year}.`
 }
 
-// Instantiate an object
-const book1 = new Book('Book One', 'John Doe', '2013')
-const book2 = new Book('Book Two', 'John Bee', '2016')
+// getAge prototype method
+Book.prototype.getAge = function () {
+  const years = new Date().getFullYear() - this.year
 
-console.log(book1.getSummary())
+  return `${this.title} was written ${years} years ago.`
+}
+
+// revise / change year protorype method
+Book.prototype.revise = function (newYear) {
+  this.year = newYear
+  this.revised = true
+}
+
+// Instantiate an object
+const book1 = new Book('Book One', 'John Doe', 2013)
+const book2 = new Book('Book Two', 'John Bee', 2016)
+
+console.log(book1)
+book1.revise(2018)
+
+console.log(book1)
